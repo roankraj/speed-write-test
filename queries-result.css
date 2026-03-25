@@ -14,16 +14,11 @@
   html {
     font-size: 62.5%;
   }
+
+  #container {
+    max-width: 72rem;
+  }
 }
 
 @media (max-width: 44em) {
-  html {
-    font-size: 50%;
-  }
-}
-
-@media (max-width: 34em) {
-  html {
-    font-size: 37.5%;
-  }
 }

@@ -12,18 +12,39 @@
 
 @media (max-width: 59em) {
   html {
-    font-size: 62.5%;
+    font-size: 68.75%;
+  }
+  .header {
+    flex-direction: column;
+    gap: 1.4rem;
+    padding: 2rem 0;
+  }
+
+  .logo {
+    padding: 0;
   }
 }
 
 @media (max-width: 44em) {
-  html {
-    font-size: 50%;
+  .container {
+    margin-top: 16rem;
+  }
+
+  .text-container {
+    padding: 0 4.4rem;
+  }
+
+  .speed-dial {
+    margin-right: 4.4rem;
   }
 }
 
 @media (max-width: 34em) {
-  html {
-    font-size: 37.5%;
+  .text-container {
+    padding: 0 6.2rem;
+  }
+
+  .speed-dial {
+    margin-right: 6.2rem;
   }
 }
