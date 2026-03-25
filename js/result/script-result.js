@@ -120,7 +120,7 @@ download.addEventListener("click", async function () {
 
   const canvas = await html2canvas(card, {
     useCORS: true,
-    backgroundColor: "#18272f",
+    backgroundColor: "#182926",
     scale: window.devicePixelRatio,
   });
 

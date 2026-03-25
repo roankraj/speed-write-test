@@ -30,12 +30,12 @@
     margin-top: 16rem;
   }
 
-  .text-container {
-    padding: 0 4.4rem;
-  }
-
   .speed-dial {
-    margin-right: 4.4rem;
+    margin-left: 4.4rem;
+  }
+  .text-container {
+    max-height: 14.732rem;
+    padding: 0 4.4rem;
   }
 }
 
@@ -45,6 +45,10 @@
   }
 
   .speed-dial {
-    margin-right: 6.2rem;
+    margin-left: 6.2rem;
+  }
+
+  .text-container {
+    max-height: 22.1rem;
   }
 }

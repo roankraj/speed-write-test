@@ -13,8 +13,8 @@
 }
 
 html {
-  background-color: #18272f;
-  color: #eff1f3;
+  background-color: #182926;
+  color: #eee;
   font-size: 92%;
   font-family: monospace;
 }
@@ -63,11 +63,11 @@ main {
 }
 
 #text span {
-  color: #83c5be;
+  color: #cbff10f4;
 }
 
 #situation {
-  color: #7e9aa8;
+  color: #cccccc;
   text-align: center;
   margin-bottom: 2.4rem;
   font-size: 1.4rem;
@@ -104,7 +104,7 @@ main {
   display: flex;
   flex-direction: column;
   border: 1px solid #f1f3ec37;
-  background-color: #1b2d36;
+  background-color: #1b2d2a;
 
   justify-content: center;
   align-items: center;
@@ -113,7 +113,7 @@ main {
 }
 
 .stat-heading {
-  color: #eff1f3e8;
+  color: #ddd;
   text-transform: uppercase;
   font-size: 1.6rem;
   letter-spacing: 0.42rem;
@@ -157,7 +157,7 @@ footer {
   height: 2rem;
   width: 2rem;
   transition: all 0.5s;
-  color: #384c56;
+  color: #555;
 }
 
 .icon:hover {
@@ -177,7 +177,7 @@ footer {
   display: flex;
   flex-direction: column;
   border: 1px solid #f1f3ec37;
-  background-color: #1b2d36;
+  background-color: #1b2d2a;
   justify-content: center;
   align-items: flex-start;
   border-radius: 1rem;
@@ -197,7 +197,7 @@ footer {
 #progress {
   height: 100%;
   width: 0%;
-  background-color: #83c5be;
+  background-color: #cbff10f4;
   border-radius: 99px;
   transition: width 0.04s linear;
 }
@@ -209,7 +209,7 @@ footer {
 }
 
 #info:hover {
-  color: #dfe0dd;
+  color: #ddd;
 }
 
 .info {
@@ -250,6 +250,6 @@ footer {
 }
 
 #percent {
-  color: #dfe0dd;
+  /* color: #dfe0dd; */
   font-size: 1.4rem;
 }
