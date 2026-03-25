@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Major+Mono+Display&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik+Mono+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="result-style.css" rel="stylesheet" />
+    <link href="queries-result.css" rel="stylesheet" />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <main>
+        <div id="text">your <span>results</span></div>
+        <div id="situation">
+          <span id="difficulty">easy</span> &bull;
+          <span id="time">30s</span> &bull; <span id="lang">english</span>
+        </div>
+
+        <div id="data">
+          <div id="stats">
+            <div class="wpm-box box">
+              <div id="wpm" class="number"></div>
+              <div class="stat-heading stat-heading-wpm">words per minute</div>
+            </div>
+
+            <div id="data-stats">
+              <div class="correct-keys-box box">
+                <div id="correct-keys" class="number"></div>
+                <div class="stat-heading">correct keystrokes</div>
+              </div>
+              <div class="correct-keys-box box">
+                <div id="wrong-keys" class="number"></div>
+                <div class="stat-heading">wrong</div>
+              </div>
+              <div class="total-keys-box box">
+                <div id="total-keys" class="number"></div>
+                <div class="stat-heading">total</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accuracy-box">
+            <div class="another-box">
+              <div class="stat-heading">
+                <span>accuracy</span>
+                <span class="info">
+                  <ion-icon id="info" name="information-circle"></ion-icon>
+                  <span class="tooltip">after corrections</span>
+                </span>
+              </div>
+              <div id="percent">0%</div>
+            </div>
+
+            <!-- ✅ Custom div progress bar — renders correctly in html2canvas -->
+            <div id="progress-track">
+              <div id="progress"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer>
+        <ion-icon name="refresh" class="icon" id="play-again"></ion-icon>
+        <ion-icon name="download" class="icon" id="download"></ion-icon>
+        <ion-icon
+          name="contact"
+          class="icon"
+          id="contact"
+          onclick="
+            window.open(
+              'https://www.linkedin.com/in/ronak-raj-732ba6381/',
+              '_blank',
+            )
+          "
+        ></ion-icon>
+        <ion-icon
+          name="cafe"
+          class="icon"
+          id="coffee"
+          onclick="
+            window.open(
+              'https://youtu.be/QDia3e12czc?si=6HjNMHjzuJgKvr4Z',
+              '_blank',
+            )
+          "
+        ></ion-icon>
+      </footer>
+    </div>
+
+    <script src="script-result.js"></script>
+  </body>
+</html>
