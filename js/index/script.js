@@ -137,7 +137,7 @@ document.addEventListener("keydown", function (e) {
   if (last) {
     if (e.key.length === 1) {
       totalKeys++;
-      e.preventDefault();
+      // e.preventDefault();
 
       if (!timerStarted) {
         timerStarted = true;
@@ -207,7 +207,7 @@ document.addEventListener("keydown", function (e) {
         });
       }
     } else if (e.key === "Backspace") {
-      e.preventDefault();
+      // e.preventDefault();
 
       spans[index].classList.replace(spans[index].classList[0], grey);
       if (index !== 0) index--;
