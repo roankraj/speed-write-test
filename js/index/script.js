@@ -211,7 +211,7 @@ document.addEventListener("click", function () {
 });
 input.addEventListener("input", function (e) {
   if (last) {
-    let value = e.target.value;
+    let value = input.value;
     if (value.length > prevValue.length) {
       let chr = value[value.length - 1];
       handleChar(chr);
