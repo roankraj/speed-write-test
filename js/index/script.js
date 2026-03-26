@@ -86,7 +86,7 @@ const charString = [
     ],
   ],
 ];
-let prevalue = "";
+let prevValue = "";
 document.addEventListener("click", function () {
   input.focus();
 });
