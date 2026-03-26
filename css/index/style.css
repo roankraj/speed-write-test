@@ -18,7 +18,7 @@ html {
   font-family: monospace;
 }
 
-body {
+/* body {
   animation: fadeIn 0.3s ease;
 }
 
@@ -29,7 +29,7 @@ body {
   to {
     opacity: 1;
   }
-}
+} */
 
 .container {
   max-width: 100rem;
@@ -176,7 +176,7 @@ body {
   text-align: center;
   padding: 0.4rem;
   font-weight: 520;
-  color: #eee;
+  color: #f0f1f1;
   transition: all 0.5s ease;
 }
 
@@ -207,7 +207,7 @@ body {
 }
 
 .green-text {
-  color: #3d4d4a;
+  color: #495755;
 }
 
 .red-text {
