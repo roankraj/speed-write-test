@@ -7,7 +7,6 @@ const grey = "grey-text";
 const yellow = "yellow-bg";
 
 let totalKeys = 0;
-
 let lang = 0;
 let difficulty = 0;
 
@@ -187,7 +186,6 @@ write();
 const spans = textContainer.children;
 
 let last = true;
-
 let timerStarted = false;
 
 document.addEventListener("keydown", function (e) {
@@ -285,7 +283,6 @@ document.addEventListener("keydown", function (e) {
 const options = document.getElementsByClassName("option");
 
 let original;
-
 for (let i = 0; i < options.length; i++) {
   let option = options[i];
   option.addEventListener("click", function () {
