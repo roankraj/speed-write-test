@@ -133,7 +133,7 @@ write();
 const spans = textContainer.children;
 let last = !0,
   timerStarted = !1;
-ocument.addEventListener("keydown", function (e) {
+document.addEventListener("keydown", function (e) {
   if (last) {
     if (e.key.length === 1) {
       totalKeys++;
