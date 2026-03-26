@@ -86,7 +86,6 @@ const charString = [
     ],
   ],
 ];
-
 speedDial = document.getElementsByClassName("speed-dial")[0];
 let time = Number(speedDial.innerText.slice(0, -1));
 localStorage.setItem("total-time", time);
@@ -120,114 +119,82 @@ write();
 const spans = textContainer.children;
 let last = !0,
   timerStarted = !1;
-
 function setStorage() {
-  localStorage.setItem("time", time);
-  localStorage.setItem("total", total);
-  localStorage.setItem("wrong", wrong);
-  localStorage.setItem("index", index);
-  localStorage.setItem("totalKeys", totalKeys);
-  localStorage.setItem("difficulty", difficulty);
-  localStorage.setItem("lang", lang);
-  let redCount = 0;
-
-  for (let i = 0; i < index; i++) {
-    if (spans[i].classList.contains("red-text")) redCount++;
-  }
-  localStorage.setItem("redCount", redCount);
+  (localStorage.setItem("time", time),
+    localStorage.setItem("total", total),
+    localStorage.setItem("wrong", wrong),
+    localStorage.setItem("index", index),
+    localStorage.setItem("totalKeys", totalKeys),
+    localStorage.setItem("difficulty", difficulty),
+    localStorage.setItem("lang", lang));
+  let e = 0;
+  for (let t = 0; t < index; t++)
+    spans[t].classList.contains("red-text") && e++;
+  localStorage.setItem("redCount", e);
 }
-
-function handleChar(char) {
-  totalKeys++;
-
-  if (!timerStarted) {
-    timerStarted = true;
-    start = true;
-
-    let speedDialId = setInterval(function () {
-      time--;
-      speedDial.innerText = `${time}s`;
-      if (time === 0) {
-        setStorage();
-
-        last = false;
-        clearInterval(speedDialId);
-        window.location.href = "results.html";
-      }
-    }, 1000);
+function handleChar(e) {
+  if ((totalKeys++, !timerStarted)) {
+    ((timerStarted = !0), (start = !0));
+    let e = setInterval(function () {
+      (time--,
+        (speedDial.innerText = `${time}s`),
+        0 === time &&
+          (setStorage(),
+          (last = !1),
+          clearInterval(e),
+          (window.location.href = "results.html")));
+    }, 1e3);
   }
-
-  if (char === str[index]) {
-    spans[index].classList.replace(spans[index].classList[0], green);
-  } else {
-    spans[index].classList.replace(spans[index].classList[0], red);
-    wrong++;
-  }
-  index++;
-
-  if (index >= str.length) {
-    setStorage();
-
-    last = false;
-    window.location.href = "results.html";
-  }
-
-  if (index < str.length && str[index] !== " ") {
-    spans[index].scrollIntoView({
-      behavior: "auto",
-      block: "center",
-      inline: "nearest",
-    });
-  }
+  (e === str[index]
+    ? spans[index].classList.replace(spans[index].classList[0], green)
+    : (spans[index].classList.replace(spans[index].classList[0], red), wrong++),
+    index++,
+    index >= str.length &&
+      (setStorage(), (last = !1), (window.location.href = "results.html")),
+    index < str.length &&
+      " " !== str[index] &&
+      spans[index].scrollIntoView({
+        behavior: "auto",
+        block: "center",
+        inline: "nearest",
+      }));
 }
-
 function handleBackspace() {
-  spans[index].classList.replace(spans[index].classList[0], grey);
-  if (index !== 0) index--;
-
-  if (index < str.length && str[index] !== " ") {
-    spans[index].scrollIntoView({
-      behavior: "auto",
-      block: "center",
-      inline: "nearest",
-    });
-  }
+  (spans[index].classList.replace(spans[index].classList[0], grey),
+    0 !== index && index--,
+    index < str.length &&
+      " " !== str[index] &&
+      spans[index].scrollIntoView({
+        behavior: "auto",
+        block: "center",
+        inline: "nearest",
+      }));
 }
 const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
-if (!isTouch) {
+isTouch ||
   document.addEventListener("keydown", function (e) {
-    if (last) {
-      if (e.key.length === 1) {
-        e.preventDefault();
-        handleChar(e.key);
-      } else if (e.key === "Backspace") {
-        e.preventDefault();
-        handleBackspace();
-      }
-      if (index < str.length)
-        spans[index].classList.replace(spans[index].classList[0], yellow);
-    }
+    last &&
+      (1 === e.key.length
+        ? (e.preventDefault(), handleChar(e.key))
+        : "Backspace" === e.key && (e.preventDefault(), handleBackspace()),
+      index < str.length &&
+        spans[index].classList.replace(spans[index].classList[0], yellow));
   });
-}
 let prevValue = "";
-document.addEventListener("click", function () {
+(document.addEventListener("click", function () {
   input.focus();
-});
-input.addEventListener("input", function (e) {
-  if (last) {
-    let value = input.value;
-    if (value.length > prevValue.length) {
-      let chr = value[value.length - 1];
-      handleChar(chr);
-    } else if (value.length < prevValue.length) {
-      // handleBackspace();
+}),
+  input.addEventListener("input", function (e) {
+    if (last) {
+      let e = input.value;
+      if (e.length > prevValue.length) {
+        handleChar(e[e.length - 1]);
+      }
+      ((prevValue = e),
+        index < str.length &&
+          spans[index].classList.replace(spans[index].classList[0], yellow));
     }
-    prevValue = value;
-    if (index < str.length)
-      spans[index].classList.replace(spans[index].classList[0], yellow);
-  }
-});
+  }));
 const options = document.getElementsByClassName("option");
 let original;
 for (let e = 0; e < options.length; e++) {
