@@ -19,7 +19,7 @@ html {
   font-family: monospace;
 }
 
-body {
+.body {
   animation: fadeIn 0.3s ease;
 }
 

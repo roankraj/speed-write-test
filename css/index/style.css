@@ -37,6 +37,12 @@ html {
   margin-top: 12.8rem;
 }
 
+#hidden-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .speed-dial {
   color: #fafafa;
   font-size: 3.2rem;
