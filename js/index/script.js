@@ -209,9 +209,9 @@ let prevValue = "";
 document.addEventListener("click", function () {
   input.focus();
 });
-input.addEventListener("input", (e) => {
+input.addEventListener("input", function () {
   if (last) {
-    let value = e.target.value;
+    let value = input.value;
     if (value.length > prevValue.length) {
       let chr = value[value.length - 1];
       handleChar(chr);
@@ -219,7 +219,6 @@ input.addEventListener("input", (e) => {
       handleBackspace();
     }
     prevValue = value;
-    input.value = "";
     if (index < str.length)
       spans[index].classList.replace(spans[index].classList[0], yellow);
   }
