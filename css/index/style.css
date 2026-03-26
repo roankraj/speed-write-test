@@ -6,17 +6,6 @@
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128 
 */
 
-/* 
-  text-container-bg: #032C4D
-  header-bg:#360825
-  normal-text:#ccc
-  hidden-text:#004540
-  wrong-text:#7E3110
-  highlighted-text:
-  time-logo:
-
-*/
-
 * {
   margin: 0;
   padding: 0;
@@ -51,10 +40,10 @@ body {
 .speed-dial {
   color: #fafafa;
   font-size: 3.2rem;
-  /* font-style: oblique; */
+
   text-align: left;
   padding-bottom: 3.2rem;
-  /* padding-left: 2.4rem; */
+
   font-weight: 520;
 }
 
@@ -63,9 +52,9 @@ body {
   border-radius: 1px;
   align-self: center;
   letter-spacing: 3px;
-  /* text-align: justify; */
+
   text-align: left;
-  /* text-align-last: left; */
+
   font-weight: 500;
 
   max-height: 11.05rem;
@@ -118,16 +107,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* max-width: 120rem;  */
-  /* margin: 0 auto; */
+
   width: 100%;
-  /* flex-direction: column; */
-  /* gap: 9.8rem; */
 }
 
 .logo {
   font-size: 1.8rem;
-  /* margin-left: 3.2rem; */
+
   padding: 0.8rem 1.2rem;
 
   font-style: italic;
@@ -208,10 +194,6 @@ body {
 
 .language-box {
   display: flex;
-}
-
-#sound .name .dropdown-menu {
-  text-transform: uppercase;
 }
 
 .grey-text,

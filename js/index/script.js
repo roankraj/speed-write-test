@@ -1,11 +1,3 @@
-// function navigateTo(url) {
-//   document.body.style.transition = "opacity 0.3s ease";
-//   document.body.style.opacity = "0";
-//   setTimeout(() => {
-//     window.location.href = url;
-//   }, 300);
-// }
-
 const textContainer = document.getElementsByClassName("text-container")[0];
 let start = false;
 
@@ -16,7 +8,6 @@ const yellow = "yellow-bg";
 
 let totalKeys = 0;
 
-let sound = true;
 let lang = 0;
 let difficulty = 0;
 
@@ -231,7 +222,6 @@ document.addEventListener("keydown", function (e) {
             last = false;
             clearInterval(speedDialId);
             window.location.href = "results.html";
-            // navigateTo("results.html");
           }
         }, 1000);
       }
@@ -262,7 +252,6 @@ document.addEventListener("keydown", function (e) {
 
         last = false;
         window.location.href = "results.html";
-        // navigateTo("results.html");
       }
 
       if (index < str.length && str[index] !== " ") {
@@ -338,11 +327,6 @@ for (let i = 0; i < options.length; i++) {
               break;
           }
           if (original != lang) write();
-          break;
-
-        case "sound":
-          if (selected === "ON") sound = true;
-          else sound = false;
           break;
       }
     }
