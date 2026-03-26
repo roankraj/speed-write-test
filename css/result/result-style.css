@@ -268,7 +268,8 @@ footer {
 }
 
 @media (max-width: 34em) {
-  html {
-    font-size: 56.25%;
+  .icon {
+    height: 3.2rem;
+    width: 3.2rem;
   }
 }
