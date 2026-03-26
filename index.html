@@ -48,18 +48,19 @@
       </div>
     </header>
     <div class="container">
-      <input
+      <div
         id="hidden-input"
-        type="text"
-        id="hidden-input"
-        type="text"
-        autocomplete="off"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="false"
-        data-form-type="other"
-        data-lpignore="true"
-      />
+        contenteditable="true"
+        inputmode="text"
+        style="
+          position: fixed;
+          opacity: 0;
+          top: 0;
+          left: 0;
+          width: 1px;
+          height: 1px;
+        "
+      ></div>
       <div class="speed-dial">30s</div>
       <main class="text-container"></main>
     </div>
