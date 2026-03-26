@@ -261,6 +261,11 @@ footer {
   #container {
     max-width: 72rem;
   }
+
+  .icon {
+    height: 2.4rem;
+    width: 2.4rem;
+  }
 }
 
 @media (max-width: 44em) {
