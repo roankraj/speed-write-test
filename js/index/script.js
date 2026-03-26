@@ -189,7 +189,7 @@ let prevValue = "";
       let e = input.value;
       if (e.length > prevValue.length) {
         handleChar(e[e.length - 1]);
-      }
+      } else (e.length, prevValue.length);
       ((prevValue = e),
         index < str.length &&
           spans[index].classList.replace(spans[index].classList[0], yellow));
