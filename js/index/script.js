@@ -89,10 +89,10 @@ const charString = [
 document.addEventListener("click", () => {
   input.focus();
 });
-input.addEventListener("input", (e) => {
-  const value = e.target.value;
-  // handleTyping(value);
-});
+// input.addEventListener("input", (e) => {
+//   const value = e.target.value;
+//   // handleTyping(value);
+// });
 speedDial = document.getElementsByClassName("speed-dial")[0];
 let time = Number(speedDial.innerText.slice(0, -1));
 localStorage.setItem("total-time", time);
