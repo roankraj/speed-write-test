@@ -92,7 +92,7 @@ document.addEventListener("click", function () {
 input.addEventListener("input", (e) => {
   const value = e.target.value;
   if (value.length > prevValue.length) {
-    const chr = value[value.length - 1];
+    let chr = value[value.length - 1];
     document.dispatchEvent(new KeyboardEvent("keydown", { key: chr }));
   } else if (value.length > prevValue.length) {
     document.dispatchEvent(new KeyboardEvent("keydown", { key: "Backspace" }));
