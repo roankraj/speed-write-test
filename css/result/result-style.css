@@ -269,15 +269,6 @@ footer {
 
 @media (max-width: 34em) {
   html {
-    font-size: 50%;
-  }
-  #container {
-    max-width: 70rem;
-  }
-
-  #text {
-    line-height: 0.9;
-    margin-bottom: 1.4rem;
-    margin-top: 2.4rem;
+    font-size: 56.25%;
   }
 }
