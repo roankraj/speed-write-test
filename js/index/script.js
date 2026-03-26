@@ -133,73 +133,96 @@ write();
 const spans = textContainer.children;
 let last = !0,
   timerStarted = !1;
-document.addEventListener("keydown", function (e) {
+ocument.addEventListener("keydown", function (e) {
   if (last) {
-    if (1 === e.key.length) {
-      if ((totalKeys++, e.preventDefault(), !timerStarted)) {
-        ((timerStarted = !0), (start = !0));
-        let e = setInterval(function () {
-          if ((time--, (speedDial.innerText = `${time}s`), 0 === time)) {
-            (localStorage.setItem("time", time),
-              localStorage.setItem("total", total),
-              localStorage.setItem("wrong", wrong),
-              localStorage.setItem("index", index),
-              localStorage.setItem("totalKeys", totalKeys),
-              localStorage.setItem("difficulty", difficulty),
-              localStorage.setItem("lang", lang));
-            let t = 0;
-            for (let e = 0; e < index; e++)
-              spans[e].classList.contains("red-text") && t++;
-            (localStorage.setItem("redCount", t),
-              (last = !1),
-              clearInterval(e),
-              (window.location.href = "results.html"));
+    if (e.key.length === 1) {
+      totalKeys++;
+      e.preventDefault();
+
+      if (!timerStarted) {
+        timerStarted = true;
+        start = true;
+
+        let speedDialId = setInterval(function () {
+          time--;
+          speedDial.innerText = `${time}s`;
+          if (time === 0) {
+            localStorage.setItem("time", time);
+            localStorage.setItem("total", total);
+            localStorage.setItem("wrong", wrong);
+            localStorage.setItem("index", index);
+            localStorage.setItem("totalKeys", totalKeys);
+            localStorage.setItem("difficulty", difficulty);
+            localStorage.setItem("lang", lang);
+
+            let redCount = 0;
+
+            for (let i = 0; i < index; i++) {
+              if (spans[i].classList.contains("red-text")) redCount++;
+            }
+            localStorage.setItem("redCount", redCount);
+
+            last = false;
+            clearInterval(speedDialId);
+            window.location.href = "results.html";
+            // navigateTo("results.html");
           }
-        }, 1e3);
+        }, 1000);
       }
-      if (
-        (e.key === str[index]
-          ? spans[index].classList.replace(spans[index].classList[0], green)
-          : (spans[index].classList.replace(spans[index].classList[0], red),
-            wrong++),
-        index++,
-        index >= str.length)
-      ) {
-        (localStorage.setItem("time", time),
-          localStorage.setItem("total", total),
-          localStorage.setItem("wrong", wrong),
-          localStorage.setItem("index", index),
-          localStorage.setItem("totalKeys", totalKeys),
-          localStorage.setItem("difficulty", difficulty),
-          localStorage.setItem("lang", lang));
-        let e = 0;
-        for (let t = 0; t < index; t++)
-          spans[t].classList.contains("red-text") && e++;
-        (localStorage.setItem("redCount", e),
-          (last = !1),
-          (window.location.href = "results.html"));
+
+      if (e.key === str[index]) {
+        spans[index].classList.replace(spans[index].classList[0], green);
+      } else {
+        spans[index].classList.replace(spans[index].classList[0], red);
+        wrong++;
       }
-      index < str.length &&
-        " " !== str[index] &&
+      index++;
+
+      if (index >= str.length) {
+        localStorage.setItem("time", time);
+        localStorage.setItem("total", total);
+        localStorage.setItem("wrong", wrong);
+        localStorage.setItem("index", index);
+        localStorage.setItem("totalKeys", totalKeys);
+        localStorage.setItem("difficulty", difficulty);
+        localStorage.setItem("lang", lang);
+
+        let redCount = 0;
+
+        for (let i = 0; i < index; i++) {
+          if (spans[i].classList.contains("red-text")) redCount++;
+        }
+        localStorage.setItem("redCount", redCount);
+
+        last = false;
+        window.location.href = "results.html";
+        // navigateTo("results.html");
+      }
+
+      if (index < str.length && str[index] !== " ") {
         spans[index].scrollIntoView({
           behavior: "auto",
           block: "center",
           inline: "nearest",
         });
-    } else
-      "Backspace" === e.key
-        ? (e.preventDefault(),
-          spans[index].classList.replace(spans[index].classList[0], grey),
-          0 !== index && index--,
-          index < str.length &&
-            " " !== str[index] &&
-            spans[index].scrollIntoView({
-              behavior: "auto",
-              block: "center",
-              inline: "nearest",
-            }))
-        : e.preventDefault();
-    index < str.length &&
+      }
+    } else if (e.key === "Backspace") {
+      e.preventDefault();
+
+      spans[index].classList.replace(spans[index].classList[0], grey);
+      if (index !== 0) index--;
+
+      if (index < str.length && str[index] !== " ") {
+        spans[index].scrollIntoView({
+          behavior: "auto",
+          block: "center",
+          inline: "nearest",
+        });
+      }
+    } else {
+      e.preventDefault();
+    }
+    if (index < str.length)
       spans[index].classList.replace(spans[index].classList[0], yellow);
   }
 });
