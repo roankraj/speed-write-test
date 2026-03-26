@@ -193,18 +193,23 @@ function handleBackspace() {
     });
   }
 }
+const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-document.addEventListener("keydown", function (e) {
-  if (last) {
-    if (e.key.length === 1) {
-      handleChar(e.key);
-    } else if (e.key === "Backspace") {
-      handleBackspace();
+if (!isTouch) {
+  document.addEventListener("keydown", function (e) {
+    if (last) {
+      if (e.key.length === 1) {
+        e.preventDefault();
+        handleChar(e.key);
+      } else if (e.key === "Backspace") {
+        e.preventDefault();
+        handleBackspace();
+      }
+      if (index < str.length)
+        spans[index].classList.replace(spans[index].classList[0], yellow);
     }
-    if (index < str.length)
-      spans[index].classList.replace(spans[index].classList[0], yellow);
-  }
-});
+  });
+}
 let prevValue = "";
 document.addEventListener("click", function () {
   input.focus();
