@@ -209,9 +209,9 @@ let prevValue = "";
 document.addEventListener("click", function () {
   input.focus();
 });
-input.addEventListener("input", function () {
+input.addEventListener("input", function (e) {
   if (last) {
-    let value = input.value;
+    let value = e.target.value;
     if (value.length > prevValue.length) {
       let chr = value[value.length - 1];
       handleChar(chr);
