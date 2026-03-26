@@ -86,21 +86,7 @@ const charString = [
     ],
   ],
 ];
-let prevValue = "";
-document.addEventListener("click", function () {
-  input.focus();
-});
-input.addEventListener("input", (e) => {
-  const value = e.target.value;
-  if (value.length > prevValue.length) {
-    let chr = value[value.length - 1];
-    document.dispatchEvent(new KeyboardEvent("keydown", { key: chr }));
-  } else if (value.length < prevValue.length) {
-    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Backspace" }));
-  }
-  prevValue = value;
-  input.value = "";
-});
+
 speedDial = document.getElementsByClassName("speed-dial")[0];
 let time = Number(speedDial.innerText.slice(0, -1));
 localStorage.setItem("total-time", time);
@@ -134,52 +120,34 @@ write();
 const spans = textContainer.children;
 let last = !0,
   timerStarted = !1;
-document.addEventListener("keydown", function (e) {
-  if (last) {
-    if (e.key.length === 1) {
-      totalKeys++;
-      // e.preventDefault();
 
-      if (!timerStarted) {
-        timerStarted = true;
-        start = true;
+function setStorage() {
+  localStorage.setItem("time", time);
+  localStorage.setItem("total", total);
+  localStorage.setItem("wrong", wrong);
+  localStorage.setItem("index", index);
+  localStorage.setItem("totalKeys", totalKeys);
+  localStorage.setItem("difficulty", difficulty);
+  localStorage.setItem("lang", lang);
+  let redCount = 0;
 
-        let speedDialId = setInterval(function () {
-          time--;
-          speedDial.innerText = `${time}s`;
-          if (time === 0) {
-            localStorage.setItem("time", time);
-            localStorage.setItem("total", total);
-            localStorage.setItem("wrong", wrong);
-            localStorage.setItem("index", index);
-            localStorage.setItem("totalKeys", totalKeys);
-            localStorage.setItem("difficulty", difficulty);
-            localStorage.setItem("lang", lang);
+  for (let i = 0; i < index; i++) {
+    if (spans[i].classList.contains("red-text")) redCount++;
+  }
+  localStorage.setItem("redCount", redCount);
+}
 
-            let redCount = 0;
+function handleChar(char) {
+  totalKeys++;
 
-            for (let i = 0; i < index; i++) {
-              if (spans[i].classList.contains("red-text")) redCount++;
-            }
-            localStorage.setItem("redCount", redCount);
+  if (!timerStarted) {
+    timerStarted = true;
+    start = true;
 
-            last = false;
-            clearInterval(speedDialId);
-            window.location.href = "results.html";
-            // navigateTo("results.html");
-          }
-        }, 1000);
-      }
-
-      if (e.key === str[index]) {
-        spans[index].classList.replace(spans[index].classList[0], green);
-      } else {
-        spans[index].classList.replace(spans[index].classList[0], red);
-        wrong++;
-      }
-      index++;
-
-      if (index >= str.length) {
+    let speedDialId = setInterval(function () {
+      time--;
+      speedDial.innerText = `${time}s`;
+      if (time === 0) {
         localStorage.setItem("time", time);
         localStorage.setItem("total", total);
         localStorage.setItem("wrong", wrong);
@@ -196,36 +164,77 @@ document.addEventListener("keydown", function (e) {
         localStorage.setItem("redCount", redCount);
 
         last = false;
+        clearInterval(speedDialId);
         window.location.href = "results.html";
         // navigateTo("results.html");
       }
+    }, 1000);
+  }
 
-      if (index < str.length && str[index] !== " ") {
-        spans[index].scrollIntoView({
-          behavior: "auto",
-          block: "center",
-          inline: "nearest",
-        });
-      }
+  if (char === str[index]) {
+    spans[index].classList.replace(spans[index].classList[0], green);
+  } else {
+    spans[index].classList.replace(spans[index].classList[0], red);
+    wrong++;
+  }
+  index++;
+
+  if (index >= str.length) {
+    setStorage();
+
+    last = false;
+    window.location.href = "results.html";
+  }
+
+  if (index < str.length && str[index] !== " ") {
+    spans[index].scrollIntoView({
+      behavior: "auto",
+      block: "center",
+      inline: "nearest",
+    });
+  }
+}
+
+function handleBackspace() {
+  spans[index].classList.replace(spans[index].classList[0], grey);
+  if (index !== 0) index--;
+
+  if (index < str.length && str[index] !== " ") {
+    spans[index].scrollIntoView({
+      behavior: "auto",
+      block: "center",
+      inline: "nearest",
+    });
+  }
+}
+
+document.addEventListener("keydown", function (e) {
+  if (last) {
+    if (e.key.length === 1) {
+      handleChar(e.key);
     } else if (e.key === "Backspace") {
-      // e.preventDefault();
-
-      spans[index].classList.replace(spans[index].classList[0], grey);
-      if (index !== 0) index--;
-
-      if (index < str.length && str[index] !== " ") {
-        spans[index].scrollIntoView({
-          behavior: "auto",
-          block: "center",
-          inline: "nearest",
-        });
-      }
-    } else {
-      e.preventDefault();
+      handleBackspace();
     }
     if (index < str.length)
       spans[index].classList.replace(spans[index].classList[0], yellow);
   }
+});
+let prevValue = "";
+document.addEventListener("click", function () {
+  input.focus();
+});
+input.addEventListener("input", (e) => {
+  const value = e.target.value;
+  if (value.length > prevValue.length) {
+    let chr = value[value.length - 1];
+    handleChar(chr);
+  } else if (value.length < prevValue.length) {
+    handleBackspace();
+  }
+  prevValue = value;
+  input.value = "";
+  if (index < str.length)
+    spans[index].classList.replace(spans[index].classList[0], yellow);
 });
 const options = document.getElementsByClassName("option");
 let original;
