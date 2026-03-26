@@ -220,3 +220,60 @@ body {
   background-color: #cbff10f4;
   color: #000;
 }
+
+/* queries */
+
+@media (max-width: 84em) {
+  html {
+    font-size: 77%;
+  }
+}
+
+@media (max-width: 75em) {
+  html {
+    font-size: 75%;
+  }
+}
+
+@media (max-width: 59em) {
+  html {
+    font-size: 68.75%;
+  }
+  .header {
+    flex-direction: column;
+    gap: 1.4rem;
+    padding: 2rem 0;
+  }
+
+  .logo {
+    padding: 0;
+  }
+}
+
+@media (max-width: 44em) {
+  .container {
+    margin-top: 16rem;
+  }
+
+  .speed-dial {
+    margin-left: 4.4rem;
+  }
+  .text-container {
+    max-height: 14.732rem;
+    padding: 0 4.4rem;
+  }
+}
+
+@media (max-width: 34em) {
+  .text-container {
+    padding: 0 6.2rem;
+  }
+
+  .speed-dial {
+    margin-left: 6.2rem;
+  }
+
+  .text-container {
+    max-height: 22.1rem;
+  }
+}

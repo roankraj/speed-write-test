@@ -238,3 +238,30 @@ footer {
 #percent {
   font-size: 1.4rem;
 }
+
+/* queries */
+
+@media (max-width: 84em) {
+  html {
+    font-size: 77%;
+  }
+}
+
+@media (max-width: 75em) {
+  html {
+    font-size: 75%;
+  }
+}
+
+@media (max-width: 59em) {
+  html {
+    font-size: 62.5%;
+  }
+
+  #container {
+    max-width: 72rem;
+  }
+}
+
+@media (max-width: 44em) {
+}
