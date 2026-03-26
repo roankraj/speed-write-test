@@ -148,25 +148,11 @@ function handleChar(char) {
       time--;
       speedDial.innerText = `${time}s`;
       if (time === 0) {
-        localStorage.setItem("time", time);
-        localStorage.setItem("total", total);
-        localStorage.setItem("wrong", wrong);
-        localStorage.setItem("index", index);
-        localStorage.setItem("totalKeys", totalKeys);
-        localStorage.setItem("difficulty", difficulty);
-        localStorage.setItem("lang", lang);
-
-        let redCount = 0;
-
-        for (let i = 0; i < index; i++) {
-          if (spans[i].classList.contains("red-text")) redCount++;
-        }
-        localStorage.setItem("redCount", redCount);
+        setStorage();
 
         last = false;
         clearInterval(speedDialId);
         window.location.href = "results.html";
-        // navigateTo("results.html");
       }
     }, 1000);
   }
@@ -224,17 +210,19 @@ document.addEventListener("click", function () {
   input.focus();
 });
 input.addEventListener("input", (e) => {
-  const value = e.target.value;
-  if (value.length > prevValue.length) {
-    let chr = value[value.length - 1];
-    handleChar(chr);
-  } else if (value.length < prevValue.length) {
-    handleBackspace();
+  if (last) {
+    let value = e.target.value;
+    if (value.length > prevValue.length) {
+      let chr = value[value.length - 1];
+      handleChar(chr);
+    } else if (value.length < prevValue.length) {
+      handleBackspace();
+    }
+    prevValue = value;
+    input.value = "";
+    if (index < str.length)
+      spans[index].classList.replace(spans[index].classList[0], yellow);
   }
-  prevValue = value;
-  input.value = "";
-  if (index < str.length)
-    spans[index].classList.replace(spans[index].classList[0], yellow);
 });
 const options = document.getElementsByClassName("option");
 let original;
