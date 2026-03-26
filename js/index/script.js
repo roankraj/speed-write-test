@@ -221,7 +221,7 @@ input.addEventListener("input", function (e) {
       let chr = value[value.length - 1];
       handleChar(chr);
     } else if (value.length < prevValue.length) {
-      handleBackspace();
+      // handleBackspace();
     }
     prevValue = value;
     if (index < str.length)
