@@ -168,7 +168,7 @@ body {
   font-style: normal;
   font-weight: 500;
   transition: all 0.3s ease-in-out;
-  font-size: 1.7rem;
+  font-size: 1.8rem;
 }
 
 .option {
@@ -177,7 +177,6 @@ body {
   padding: 0.4rem;
   font-weight: 520;
   color: #eee;
-  /* background-color: #18272f; */
   transition: all 0.5s ease;
 }
 
