@@ -91,9 +91,14 @@ document.addEventListener("click", function () {
 });
 input.addEventListener("input", (e) => {
   const value = e.target.value;
-  const span = document.createElement("span");
-  span.innerText = value;
-  textContainer.appendChild(span);
+  if (value.length > prevValue.length) {
+    const chr = value[value.length - 1];
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: chr }));
+  } else if (value.length > prevValue.length) {
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Backspace" }));
+  }
+  prevValue = value;
+  // input.value = "";
 });
 speedDial = document.getElementsByClassName("speed-dial")[0];
 let time = Number(speedDial.innerText.slice(0, -1));
