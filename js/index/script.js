@@ -86,6 +86,7 @@ const charString = [
     ],
   ],
 ];
+let prevalue = "";
 document.addEventListener("click", function () {
   input.focus();
 });
@@ -94,11 +95,11 @@ input.addEventListener("input", (e) => {
   if (value.length > prevValue.length) {
     let chr = value[value.length - 1];
     document.dispatchEvent(new KeyboardEvent("keydown", { key: chr }));
-  } else if (value.length > prevValue.length) {
+  } else if (value.length < prevValue.length) {
     document.dispatchEvent(new KeyboardEvent("keydown", { key: "Backspace" }));
   }
   prevValue = value;
-  // input.value = "";
+  input.value = "";
 });
 speedDial = document.getElementsByClassName("speed-dial")[0];
 let time = Number(speedDial.innerText.slice(0, -1));
