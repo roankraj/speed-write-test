@@ -86,7 +86,7 @@ const charString = [
     ],
   ],
 ];
-document.addEventListener("click", () => {
+document.addEventListener("click", function () {
   input.focus();
 });
 input.addEventListener("input", (e) => {
