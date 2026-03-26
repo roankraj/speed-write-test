@@ -265,6 +265,10 @@ footer {
     height: 2.4rem;
     width: 2.4rem;
   }
+
+  footer {
+    justify-content: space-evenly;
+  }
 }
 
 @media (max-width: 44em) {
