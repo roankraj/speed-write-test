@@ -192,6 +192,9 @@ html {
   cursor: pointer;
   scale: 1.1;
 }
+.option:active {
+  color: #cbff10f4;
+}
 
 .name:hover .dropdown-menu {
   opacity: 1;
