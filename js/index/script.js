@@ -87,6 +87,8 @@ const charString = [
   ],
 ];
 
+input.focus();
+
 speedDial = document.getElementsByClassName("speed-dial")[0];
 let time = Number(speedDial.innerText.slice(0, -1));
 localStorage.setItem("total-time", time);
@@ -99,7 +101,6 @@ function write() {
   (textContainer.classList.add("fade-out"),
     setTimeout(() => {
       ((textContainer.innerHTML = ""),
-        (arrIndex = Math.floor(10 * Math.random())),
         (str = charString[lang][difficulty][arrIndex]),
         (total = str.length));
       const e = document.createElement("span");
@@ -134,12 +135,13 @@ function setStorage() {
   }
   localStorage.setItem("redCount", redCount);
 }
+let speedDialId;
 function handleChar(char) {
   totalKeys++;
   if (!timerStarted) {
     timerStarted = true;
     start = true;
-    let speedDialId = setInterval(function () {
+    speedDialId = setInterval(function () {
       time--;
       speedDial.innerText = `${time}s`;
       if (time === 0) {
@@ -201,8 +203,15 @@ if (!isTouch) {
   });
 }
 let prevValue = "";
-document.addEventListener("click", function () {
-  input.focus();
+const container = document.getElementsByClassName("container")[0];
+container.addEventListener("click", function () {
+  if (document.activeElement.id == "hidden-input") {
+    input.blur();
+    console.log("blur");
+  } else {
+    input.focus();
+    console.log("focus");
+  }
 });
 input.addEventListener("input", function (e) {
   if (last) {
@@ -220,40 +229,59 @@ input.addEventListener("input", function (e) {
 });
 const options = document.getElementsByClassName("option");
 let original;
+
+function chosing(t) {
+  let e = t.innerText;
+  switch (t.parentElement.parentElement.parentElement.id) {
+    case "difficulty":
+      switch (((original = difficulty), e)) {
+        case "Easy":
+          difficulty = 0;
+          break;
+        case "Medium":
+          difficulty = 1;
+          break;
+        case "Hard":
+          difficulty = 2;
+      }
+      write();
+      break;
+    case "time":
+      ((time = Number(e.slice(0, -1))),
+        localStorage.setItem("total-time", time),
+        (speedDial.innerText = `${time}s`));
+      write();
+      break;
+    case "language":
+      switch (((original = lang), (difficulty = 0), e)) {
+        case "English":
+          lang = 0;
+          break;
+        case "हिन्दी":
+          lang = 1;
+      }
+      write();
+      input.focus();
+  }
+}
+
+function reset(t) {
+  index = 0;
+  wrong = 0;
+  totalKeys = 0;
+  clearInterval(speedDialId);
+  timerStarted = false;
+  time = localStorage.getItem("total-time");
+  speedDial.innerText = `${time}s`;
+  if (t.parentElement.parentElement.parentElement.id !== "time") {
+    arrIndex = Math.floor(10 * Math.random());
+  }
+}
+
 for (let e = 0; e < options.length; e++) {
   let t = options[e];
   t.addEventListener("click", function () {
-    if (!timerStarted) {
-      let e = t.innerText;
-      switch (t.parentElement.parentElement.parentElement.id) {
-        case "difficulty":
-          switch (((original = difficulty), e)) {
-            case "Easy":
-              difficulty = 0;
-              break;
-            case "Medium":
-              difficulty = 1;
-              break;
-            case "Hard":
-              difficulty = 2;
-          }
-          original != difficulty && write();
-          break;
-        case "time":
-          ((time = Number(e.slice(0, -1))),
-            localStorage.setItem("total-time", time),
-            (speedDial.innerText = `${time}s`));
-          break;
-        case "language":
-          switch (((original = lang), (difficulty = 0), e)) {
-            case "English":
-              lang = 0;
-              break;
-            case "हिन्दी":
-              lang = 1;
-          }
-          original != lang && write();
-      }
-    }
+    reset(t);
+    chosing(t);
   });
 }
