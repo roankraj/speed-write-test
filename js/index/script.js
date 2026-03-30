@@ -86,10 +86,7 @@ const charString = [
     ],
   ],
 ];
-
-input.focus();
-
-speedDial = document.getElementsByClassName("speed-dial")[0];
+(input.focus(), (speedDial = document.getElementsByClassName("speed-dial")[0]));
 let time = Number(speedDial.innerText.slice(0, -1));
 localStorage.setItem("total-time", time);
 let wrong = 0,
@@ -115,126 +112,90 @@ function write() {
       }
       (textContainer.classList.remove("fade-out"),
         textContainer.classList.add("fade-in"));
-    }, 200));
+    }, 200),
+    input.focus());
 }
 write();
 const spans = textContainer.children;
-let last = !0,
+let speedDialId,
+  last = !0,
   timerStarted = !1;
 function setStorage() {
-  localStorage.setItem("time", time);
-  localStorage.setItem("total", total);
-  localStorage.setItem("wrong", wrong);
-  localStorage.setItem("index", index);
-  localStorage.setItem("totalKeys", totalKeys);
-  localStorage.setItem("difficulty", difficulty);
-  localStorage.setItem("lang", lang);
-  let redCount = 0;
-  for (let i = 0; i < index; i++) {
-    if (spans[i].classList.contains("red-text")) redCount++;
-  }
-  localStorage.setItem("redCount", redCount);
+  (localStorage.setItem("time", time),
+    localStorage.setItem("total", total),
+    localStorage.setItem("wrong", wrong),
+    localStorage.setItem("index", index),
+    localStorage.setItem("totalKeys", totalKeys),
+    localStorage.setItem("difficulty", difficulty),
+    localStorage.setItem("lang", lang));
+  let e = 0;
+  for (let t = 0; t < index; t++)
+    spans[t].classList.contains("red-text") && e++;
+  localStorage.setItem("redCount", e);
 }
-let speedDialId;
-function handleChar(char) {
-  totalKeys++;
-  if (!timerStarted) {
-    timerStarted = true;
-    start = true;
-    speedDialId = setInterval(function () {
-      time--;
-      speedDial.innerText = `${time}s`;
-      if (time === 0) {
-        setStorage();
-
-        last = false;
-        clearInterval(speedDialId);
-        window.location.href = "results.html";
-      }
-    }, 1000);
-  }
-  if (char === str[index]) {
-    spans[index].classList.replace(spans[index].classList[0], green);
-  } else {
-    spans[index].classList.replace(spans[index].classList[0], red);
-    wrong++;
-  }
-  index++;
-  if (index >= str.length) {
-    setStorage();
-
-    last = false;
-    window.location.href = "results.html";
-  }
-  if (index < str.length && str[index] !== " ") {
-    spans[index].scrollIntoView({
-      behavior: "auto",
-      block: "center",
-      inline: "nearest",
-    });
-  }
+function handleChar(e) {
+  (totalKeys++,
+    timerStarted ||
+      ((timerStarted = !0),
+      (start = !0),
+      (speedDialId = setInterval(function () {
+        (time--,
+          (speedDial.innerText = `${time}s`),
+          0 === time &&
+            (setStorage(),
+            (last = !1),
+            clearInterval(speedDialId),
+            (window.location.href = "results.html")));
+      }, 1e3))),
+    e === str[index]
+      ? spans[index].classList.replace(spans[index].classList[0], green)
+      : (spans[index].classList.replace(spans[index].classList[0], red),
+        wrong++),
+    index++,
+    index >= str.length &&
+      (setStorage(), (last = !1), (window.location.href = "results.html")),
+    index < str.length &&
+      " " !== str[index] &&
+      spans[index].scrollIntoView({
+        behavior: "auto",
+        block: "center",
+        inline: "nearest",
+      }));
 }
 function handleBackspace() {
-  spans[index].classList.replace(spans[index].classList[0], grey);
-  if (index !== 0) index--;
-
-  if (index < str.length && str[index] !== " ") {
-    spans[index].scrollIntoView({
-      behavior: "auto",
-      block: "center",
-      inline: "nearest",
-    });
-  }
+  (spans[index].classList.replace(spans[index].classList[0], grey),
+    0 !== index && index--,
+    index < str.length &&
+      " " !== str[index] &&
+      spans[index].scrollIntoView({
+        behavior: "auto",
+        block: "center",
+        inline: "nearest",
+      }));
 }
-const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-if (!isTouch) {
-  document.addEventListener("keydown", function (e) {
-    if (last) {
-      if (e.key.length === 1) {
-        e.preventDefault();
-        handleChar(e.key);
-      } else if (e.key === "Backspace") {
-        e.preventDefault();
-        handleBackspace();
-      }
-      if (index < str.length)
-        spans[index].classList.replace(spans[index].classList[0], yellow);
-    }
-  });
-}
+document.addEventListener("keydown", function (e) {
+  "Enter" === e.key && document.activeElement.click();
+});
 let prevValue = "";
 const container = document.getElementsByClassName("container")[0];
-container.addEventListener("click", function () {
-  if (document.activeElement.id == "hidden-input") {
-    input.blur();
-    console.log("blur");
-  } else {
-    input.focus();
-    console.log("focus");
-  }
-});
 input.addEventListener("input", function (e) {
   if (last) {
-    let value = input.value;
-    if (value.length > prevValue.length) {
-      let chr = value[value.length - 1];
-      handleChar(chr);
-    } else if (value.length < prevValue.length) {
-      handleBackspace();
-    }
-    prevValue = value;
-    if (index < str.length)
-      spans[index].classList.replace(spans[index].classList[0], yellow);
+    let e = input.value;
+    if (e.length > prevValue.length) {
+      handleChar(e[e.length - 1]);
+    } else e.length < prevValue.length && handleBackspace();
+    ((prevValue = e),
+      index < str.length &&
+        spans[index].classList.replace(spans[index].classList[0], yellow));
   }
 });
 const options = document.getElementsByClassName("option");
 let original;
-
-function chosing(t) {
-  let e = t.innerText;
-  switch (t.parentElement.parentElement.parentElement.id) {
+function chosing(e) {
+  let t = e.innerText;
+  switch (e.parentElement.parentElement.parentElement.id) {
     case "difficulty":
-      switch (((original = difficulty), e)) {
+      switch (((original = difficulty), t)) {
         case "Easy":
           difficulty = 0;
           break;
@@ -247,13 +208,13 @@ function chosing(t) {
       write();
       break;
     case "time":
-      ((time = Number(e.slice(0, -1))),
+      ((time = Number(t.slice(0, -1))),
         localStorage.setItem("total-time", time),
-        (speedDial.innerText = `${time}s`));
-      write();
+        (speedDial.innerText = `${time}s`),
+        write());
       break;
     case "language":
-      switch (((original = lang), (difficulty = 0), e)) {
+      switch (((original = lang), (difficulty = 0), t)) {
         case "English":
           lang = 0;
           break;
@@ -261,27 +222,41 @@ function chosing(t) {
           lang = 1;
       }
       write();
-      input.focus();
   }
 }
-
-function reset(t) {
-  index = 0;
-  wrong = 0;
-  totalKeys = 0;
-  clearInterval(speedDialId);
-  timerStarted = false;
-  time = localStorage.getItem("total-time");
-  speedDial.innerText = `${time}s`;
-  if (t.parentElement.parentElement.parentElement.id !== "time") {
-    arrIndex = Math.floor(10 * Math.random());
-  }
+function reset(e) {
+  ((index = 0),
+    (wrong = 0),
+    (totalKeys = 0),
+    clearInterval(speedDialId),
+    (timerStarted = !1),
+    (time = localStorage.getItem("total-time")),
+    (speedDial.innerText = `${time}s`),
+    "time" !== e.parentElement.parentElement.parentElement.id &&
+      (arrIndex = Math.floor(10 * Math.random())));
 }
-
 for (let e = 0; e < options.length; e++) {
   let t = options[e];
   t.addEventListener("click", function () {
-    reset(t);
-    chosing(t);
+    (reset(t),
+      chosing(t),
+      t.parentElement.classList.remove("dropdown-menu-show"),
+      input.focus());
   });
 }
+const settings = document.getElementsByClassName("name");
+for (let e = 0; e < settings.length; e++)
+  settings[e].childNodes[1].addEventListener("click", function () {
+    (settings[e].childNodes[3].classList.contains("dropdown-menu-show")
+      ? settings[e].childNodes[3].classList.remove("dropdown-menu-show")
+      : settings[e].childNodes[3].classList.add("dropdown-menu-show"),
+      input.focus());
+  });
+function hide() {
+  for (let e = 0; e < settings.length; e++)
+    settings[e].childNodes[3].classList.contains("dropdown-menu-show") &&
+      settings[e].childNodes[3].classList.remove("dropdown-menu-show");
+  input.focus();
+}
+container.addEventListener("click", hide);
+const header = document.getElementsByClassName("header")[0];
