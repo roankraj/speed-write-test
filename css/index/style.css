@@ -157,6 +157,10 @@ html {
   cursor: pointer;
 }
 
+.name:active {
+  color: #cbff10f4;
+}
+
 .dropdown-menu {
   width: 120%;
   text-transform: capitalize;
@@ -183,19 +187,19 @@ html {
   text-align: center;
   padding: 0.4rem;
   font-weight: 520;
-  color: #f0f1f1;
   transition: all 0.5s ease;
+  color: #f0f1f1;
 }
 
 .option:hover {
-  color: #18272f;
-  background-color: #eee;
+  color: #cbff10f4;
   cursor: pointer;
   scale: 1.1;
 }
 .option:active {
-  color: #cbff10f4;
+  color: #cdff1af3;
 }
+
 .dropdown-menu-show {
   pointer-events: all;
   opacity: 1;
@@ -296,4 +300,8 @@ html {
 .option:focus-visible {
   outline: 2px solid #cbff10f4;
   border-radius: 2px;
+}
+
+.white-bg {
+  color: #cbff10f4;
 }
