@@ -99,17 +99,14 @@ const arr1 = [options[0], options[1], options[2]],
   arr2 = [options[3], options[4], options[5], options[6]],
   arr3 = [options[7], options[8]];
 function write() {
-  for (let i = 0; i < options.length; i++) {
-    options[i].classList.remove("white-bg");
-  }
-
+  for (let e = 0; e < options.length; e++)
+    options[e].classList.remove("white-bg");
   arr1[difficulty].classList.add("white-bg");
-  let timeIndex = Math.floor(time / 30);
-  timeIndex -= 1;
-  arr2[timeIndex].classList.add("white-bg");
-  arr3[lang].classList.add("white-bg");
-
-  (textContainer.classList.add("fade-out"),
+  let e = Math.floor(time / 30);
+  ((e -= 1),
+    arr2[e].classList.add("white-bg"),
+    arr3[lang].classList.add("white-bg"),
+    textContainer.classList.add("fade-out"),
     setTimeout(() => {
       ((textContainer.innerHTML = ""),
         (str = charString[lang][difficulty][arrIndex]),
@@ -192,17 +189,6 @@ document.addEventListener("keydown", function (e) {
 });
 let prevValue = "";
 const container = document.getElementsByClassName("container")[0];
-input.addEventListener("input", function (e) {
-  if (last) {
-    let e = input.value;
-    if (e.length > prevValue.length) {
-      handleChar(e[e.length - 1]);
-    } else e.length < prevValue.length && handleBackspace();
-    ((prevValue = e),
-      index < str.length &&
-        spans[index].classList.replace(spans[index].classList[0], yellow));
-  }
-});
 let original;
 function chosing(e) {
   let t = e.innerText;
@@ -227,7 +213,7 @@ function chosing(e) {
         write());
       break;
     case "language":
-      switch (((original = lang), (difficulty = difficulty), t)) {
+      switch (((original = lang), t)) {
         case "English":
           lang = 0;
           break;
@@ -248,6 +234,17 @@ function reset(e) {
     "time" !== e.parentElement.parentElement.parentElement.id &&
       (arrIndex = Math.floor(10 * Math.random())));
 }
+input.addEventListener("input", function (e) {
+  if (last) {
+    let e = input.value;
+    (e.length > prevValue.length
+      ? handleChar(e[e.length - 1])
+      : e.length < prevValue.length && handleBackspace(),
+      (prevValue = e),
+      index < str.length &&
+        spans[index].classList.replace(spans[index].classList[0], yellow));
+  }
+});
 for (let e = 0; e < options.length; e++) {
   let t = options[e];
   t.addEventListener("click", function () {
@@ -257,7 +254,7 @@ for (let e = 0; e < options.length; e++) {
       input.focus());
   });
 }
-const settings = document.getElementsByClassName("name");
+const settings = document.getElementsByClassName();
 for (let e = 0; e < settings.length; e++)
   settings[e].childNodes[1].addEventListener("click", function () {
     (settings[e].childNodes[3].classList.contains("dropdown-menu-show")
