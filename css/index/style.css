@@ -34,7 +34,7 @@ html {
 .container {
   max-width: 100rem;
   margin: auto;
-  margin-top: 12.8rem;
+  padding-top: 12.8rem;
 }
 
 #hidden-input {
@@ -150,6 +150,11 @@ html {
   letter-spacing: -0.1px;
   text-transform: uppercase;
   transition: all 0.3s;
+  position: relative;
+}
+
+.name span {
+  border: 10px transparent solid;
 }
 
 .name:hover {
@@ -265,7 +270,7 @@ html {
 
 @media (max-width: 44em) {
   .container {
-    margin-top: 16rem;
+    padding-top: 16rem;
   }
 
   .speed-dial {
