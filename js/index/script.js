@@ -254,7 +254,7 @@ for (let e = 0; e < options.length; e++) {
       input.focus());
   });
 }
-const settings = document.getElementsByClassName();
+const settings = document.getElementsByClassName("name");
 for (let e = 0; e < settings.length; e++)
   settings[e].childNodes[1].addEventListener("click", function () {
     (settings[e].childNodes[3].classList.contains("dropdown-menu-show")
