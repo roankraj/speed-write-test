@@ -34,7 +34,8 @@ html {
 .container {
   max-width: 100rem;
   margin: auto;
-  padding-top: 12.8rem;
+  /* padding-top: 12.8rem; */
+  padding: 12.8rem 0;
 }
 
 #hidden-input {
