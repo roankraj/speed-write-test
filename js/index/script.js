@@ -5,12 +5,6 @@ const textContainer = document.getElementsByClassName("text-container")[0],
   RED = "red-text",
   GREY = "grey-text",
   YELLOW = "yellow-bg";
-function forceKeyboard() {
-  input.setAttribute("readonly", false);
-  input.removeAttribute("readonly");
-  input.focus();
-  input.click();
-}
 let start = !1,
   totalKeys = 0,
   lang = 0,
@@ -155,7 +149,7 @@ function write() {
         (spanClassCache[0] = CLASS_YELLOW),
         textContainer.classList.remove("fade-out"),
         textContainer.classList.add("fade-in"),
-        forceKeyboard());
+        input.focus());
     }, 200));
 }
 function setStorage() {
@@ -270,7 +264,7 @@ for (let e = 0; e < options.length; e++) {
     (reset(t),
       chosing(t),
       t.parentElement.classList.remove("dropdown-menu-show"),
-      forceKeyboard());
+      input.focus());
   });
 }
 const settings = document.getElementsByClassName("name"),
@@ -278,15 +272,15 @@ const settings = document.getElementsByClassName("name"),
 for (let e = 0; e < settings.length; e++)
   settings[e].childNodes[1].addEventListener("click", () => {
     (settings[e].childNodes[3].classList.toggle("dropdown-menu-show"),
-      forceKeyboard());
+      input.focus());
   });
 function hide() {
   for (let e = 0; e < settings.length; e++)
     settings[e].childNodes[3].classList.remove("dropdown-menu-show");
-  forceKeyboard();
+  input.focus();
 }
 (container.addEventListener("click", hide),
   document.addEventListener("keydown", (e) => {
     "Enter" === e.key && document.activeElement.click();
   }),
-  forceKeyboard());
+  input.focus());
