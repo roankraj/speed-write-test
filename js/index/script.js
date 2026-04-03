@@ -268,10 +268,10 @@ for (let e = 0; e < options.length; e++) {
 const settings = document.getElementsByClassName("name"),
   container = document.getElementsByClassName("container")[0];
 for (let e = 0; e < settings.length; e++)
-  settings[e].childNodes[1].addEventListener("click", () => {
-    (settings[e].childNodes[3].classList.contains("dropdown-menu-show") &&
+  settings[e].children[0].addEventListener("click", () => {
+    (settings[e].children[1].classList.contains("dropdown-menu-show") &&
       document.activeElement.blur(),
-      settings[e].childNodes[3].classList.toggle("dropdown-menu-show"));
+      settings[e].children[1].classList.toggle("dropdown-menu-show"));
   });
 (document.addEventListener("keydown", (e) => {
   "Enter" === e.key && document.activeElement.click();
