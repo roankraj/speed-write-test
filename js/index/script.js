@@ -115,8 +115,8 @@ const charString = [
   CLASS_NAMES = [GREY, YELLOW, GREEN, RED];
 let spanClassCache = new Uint8Array(0);
 function setSpanClass(e, t) {
-  if (spanClassCache[e] === t) return;
-  ((spans[e].className = CLASS_NAMES[t]), (spanClassCache[e] = t));
+  spanClassCache[e] !== t &&
+    ((spans[e].className = CLASS_NAMES[t]), (spanClassCache[e] = t));
 }
 const speedDial = document.getElementsByClassName("speed-dial")[0];
 let time = Number(speedDial.innerText.slice(0, -1));
@@ -148,8 +148,7 @@ function write() {
         (spanClassCache = new Uint8Array(str.length)),
         (spanClassCache[0] = CLASS_YELLOW),
         textContainer.classList.remove("fade-out"),
-        textContainer.classList.add("fade-in"),
-        input.focus());
+        textContainer.classList.add("fade-in"));
     }, 200));
 }
 function setStorage() {
@@ -273,15 +272,16 @@ for (let e = 0; e < settings.length; e++)
   settings[e].childNodes[1].addEventListener("click", () => {
     settings[e].childNodes[3].classList.toggle("dropdown-menu-show");
   });
-
 function hide() {
   for (let e = 0; e < settings.length; e++)
     settings[e].childNodes[3].classList.remove("dropdown-menu-show");
   input.focus();
 }
-
 (container.addEventListener("click", hide),
   document.addEventListener("keydown", (e) => {
     "Enter" === e.key && document.activeElement.click();
   }),
-  input.focus());
+  input.focus(),
+  document.addEventListener("click", () => {
+    document.activeElement === document.body && input.focus();
+  }));
