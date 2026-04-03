@@ -278,5 +278,9 @@ for (let e = 0; e < settings.length; e++)
 }),
   input.focus(),
   document.addEventListener("click", () => {
-    document.activeElement === document.body && input.focus();
+    if (document.activeElement === document.body)
+      for (let e = 0; e < settings.length; e++)
+        (settings[e].children[1].classList.contains("dropdown-menu-show") &&
+          settings[e].children[1].classList.remove("dropdown-menu-show"),
+          input.focus());
   }));
