@@ -262,25 +262,20 @@ for (let e = 0; e < options.length; e++) {
   t.addEventListener("click", () => {
     (reset(t),
       chosing(t),
-      t.parentElement.classList.remove("dropdown-menu-show"),
-      input.focus());
+      t.parentElement.classList.remove("dropdown-menu-show"));
   });
 }
 const settings = document.getElementsByClassName("name"),
   container = document.getElementsByClassName("container")[0];
 for (let e = 0; e < settings.length; e++)
   settings[e].childNodes[1].addEventListener("click", () => {
+    if (settings[e].childNodes[3].classList.contains("dropdown-menu-show"))
+      document.activeElement.blur();
     settings[e].childNodes[3].classList.toggle("dropdown-menu-show");
   });
-function hide() {
-  for (let e = 0; e < settings.length; e++)
-    settings[e].childNodes[3].classList.remove("dropdown-menu-show");
-  input.focus();
-}
-(container.addEventListener("click", hide),
-  document.addEventListener("keydown", (e) => {
-    "Enter" === e.key && document.activeElement.click();
-  }),
+(document.addEventListener("keydown", (e) => {
+  "Enter" === e.key && document.activeElement.click();
+}),
   input.focus(),
   document.addEventListener("click", () => {
     document.activeElement === document.body && input.focus();
