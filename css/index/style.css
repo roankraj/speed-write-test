@@ -24,7 +24,7 @@ html {
 }
 .container {
   max-width: 100rem;
-  margin: auto;
+  margin: 0 auto;
   padding: 12.8rem 0;
 }
 #hidden-input {
