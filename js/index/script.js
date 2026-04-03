@@ -271,14 +271,15 @@ const settings = document.getElementsByClassName("name"),
   container = document.getElementsByClassName("container")[0];
 for (let e = 0; e < settings.length; e++)
   settings[e].childNodes[1].addEventListener("click", () => {
-    (settings[e].childNodes[3].classList.toggle("dropdown-menu-show"),
-      input.focus());
+    settings[e].childNodes[3].classList.toggle("dropdown-menu-show");
   });
+
 function hide() {
   for (let e = 0; e < settings.length; e++)
     settings[e].childNodes[3].classList.remove("dropdown-menu-show");
   input.focus();
 }
+
 (container.addEventListener("click", hide),
   document.addEventListener("keydown", (e) => {
     "Enter" === e.key && document.activeElement.click();

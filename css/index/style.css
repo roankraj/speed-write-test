@@ -216,8 +216,9 @@ html {
     margin-left: 6.2rem;
   }
 }
+
 .name span:focus-visible {
-  outline-offset: 5px;
+  outline-offset: 1px;
   outline: #cbff10f4 solid 2px;
   border-radius: 2px;
 }
