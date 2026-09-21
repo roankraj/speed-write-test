@@ -2,6 +2,14 @@
 
 A minimalist, modern typing-speed test where users can measure their **WPM (words per minute)** and **accuracy** across customizable settings.
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="./img/demo1.png" width="45%" alt="Speed Write Test Screenshot 1">
+  &nbsp;&nbsp;&nbsp;
+  <img src="./img/demo2.png" width="45%" alt="Speed Write Test Screenshot 2">
+</p>
+
 🔗 **Live Demo:** [roankraj.github.io/speed-write-test](https://roankraj.github.io/speed-write-test/)
 
 ## ✨ Features
